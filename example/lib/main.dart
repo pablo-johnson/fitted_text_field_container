@@ -5,9 +5,11 @@ import 'package:fitted_text_field_container/fitted_text_field_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -22,7 +24,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+  MyHomePage({super.key, required this.title});
 
   final String title;
 
@@ -31,15 +33,15 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  TextEditingController _textEditingCtl;
-  FocusNode _plainFocusNode;
-  FocusNode _poundFocusNode;
-  FocusNode _paddingFocusNode;
-  FocusNode _aniDollarFocusNode;
-  FocusNode _aniDongFocusNode;
-  FocusNode _aniEuroFocusNode;
-  FocusNode _aniPaddingFocusNode;
-  FocusNode _aniWholePoundFocusNode;
+  late TextEditingController _textEditingCtl;
+  late FocusNode _plainFocusNode;
+  late FocusNode _poundFocusNode;
+  late FocusNode _paddingFocusNode;
+  late FocusNode _aniDollarFocusNode;
+  late FocusNode _aniDongFocusNode;
+  late FocusNode _aniEuroFocusNode;
+  late FocusNode _aniPaddingFocusNode;
+  late FocusNode _aniWholePoundFocusNode;
 
   @override
   void initState() {
@@ -54,13 +56,14 @@ class _MyHomePageState extends State<MyHomePage> {
     _aniPaddingFocusNode = FocusNode();
     _aniWholePoundFocusNode = FocusNode();
 
-    Timer(Duration(milliseconds: 2000), () {
+    Timer(const Duration(milliseconds: 2000), () {
       // Uncomment this for automatic text input
       // runInputer(20);
     });
   }
 
   final Random rand = Random(DateTime.now().millisecondsSinceEpoch);
+
   void runInputer(int i) {
     Timer(Duration(milliseconds: 50 + rand.nextInt(500)), () {
       setState(() {
@@ -84,7 +87,7 @@ class _MyHomePageState extends State<MyHomePage> {
           runDelete(_textEditingCtl.text.length - 1,
               ((600 / 10) * end).round() + rand.nextInt(300) + 300);
         } else {
-          Timer(Duration(milliseconds: 2000), () {
+          Timer(const Duration(milliseconds: 2000), () {
             runInputer(20);
           });
         }
@@ -99,16 +102,17 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: ListView(
-        padding: EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 50),
+        padding:
+            const EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 50),
         children: <Widget>[
           Text(
             'Static examples',
-            style: Theme.of(context).textTheme.headline4,
+            style: Theme.of(context).textTheme.headlineLarge,
           ),
           Fit(
             child: TextField(
               controller: _textEditingCtl,
-              style: TextStyle(fontSize: 16),
+              style: const TextStyle(fontSize: 16),
               focusNode: _plainFocusNode,
               textInputAction: TextInputAction.next,
               keyboardType: TextInputType.text,
@@ -117,22 +121,24 @@ class _MyHomePageState extends State<MyHomePage> {
               onSubmitted: (String value) {
                 FocusScope.of(context).requestFocus(_poundFocusNode);
               },
-              decoration: InputDecoration(labelText: "Multiline textfield"),
+              decoration:
+                  const InputDecoration(labelText: "Multiline textfield"),
             ),
           ),
           Fit(
             child: TextField(
               controller: _textEditingCtl,
-              style: TextStyle(fontSize: 26),
+              style: const TextStyle(fontSize: 26),
               focusNode: _poundFocusNode,
               textInputAction: TextInputAction.next,
-              keyboardType: TextInputType.numberWithOptions(decimal: true),
+              keyboardType:
+                  const TextInputType.numberWithOptions(decimal: true),
               maxLines: null,
               inputFormatters: [
                 FilteringTextInputFormatter.allow(RegExp(r"\d+\.?\d*")),
               ],
               textAlign: TextAlign.right,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 prefixText: "£",
                 labelText: "Prefix",
               ),
@@ -144,7 +150,7 @@ class _MyHomePageState extends State<MyHomePage> {
           Fit(
             child: TextField(
               controller: _textEditingCtl,
-              style: TextStyle(fontSize: 26),
+              style: const TextStyle(fontSize: 26),
               focusNode: _paddingFocusNode,
               textInputAction: TextInputAction.next,
               keyboardType: TextInputType.text,
@@ -158,14 +164,14 @@ class _MyHomePageState extends State<MyHomePage> {
                 filled: true,
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(4),
-                  borderSide: BorderSide(color: Colors.grey),
+                  borderSide: const BorderSide(color: Colors.grey),
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(4),
-                  borderSide: BorderSide(color: Colors.blue, width: 3),
+                  borderSide: const BorderSide(color: Colors.blue, width: 3),
                 ),
-                border: OutlineInputBorder(),
-                contentPadding: EdgeInsets.symmetric(
+                border: const OutlineInputBorder(),
+                contentPadding: const EdgeInsets.symmetric(
                   vertical: 15,
                   horizontal: 20,
                 ),
@@ -179,16 +185,17 @@ class _MyHomePageState extends State<MyHomePage> {
             calculator: FittedTextFieldCalculator.fitAll,
             child: TextField(
               controller: _textEditingCtl,
-              style: TextStyle(fontSize: 26),
+              style: const TextStyle(fontSize: 26),
               focusNode: _poundFocusNode,
               textInputAction: TextInputAction.next,
-              keyboardType: TextInputType.numberWithOptions(decimal: true),
+              keyboardType:
+                  const TextInputType.numberWithOptions(decimal: true),
               maxLines: null,
               inputFormatters: [
                 FilteringTextInputFormatter.allow(RegExp(r"\d+\.?\d*")),
               ],
               textAlign: TextAlign.right,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 hintText: "Custom width calculator",
               ),
               onSubmitted: (String value) {
@@ -198,20 +205,21 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           Text(
             'Animated examples',
-            style: Theme.of(context).textTheme.headline4,
+            style: Theme.of(context).textTheme.headlineLarge,
           ),
           AnimFit(
             child: TextField(
               controller: _textEditingCtl,
-              style: TextStyle(fontSize: 16),
+              style: const TextStyle(fontSize: 16),
               focusNode: _aniDollarFocusNode,
               textInputAction: TextInputAction.next,
-              keyboardType: TextInputType.numberWithOptions(decimal: true),
+              keyboardType:
+                  const TextInputType.numberWithOptions(decimal: true),
               inputFormatters: [
                 FilteringTextInputFormatter.allow(RegExp(r"\d+\.?\d*")),
               ],
               textAlign: TextAlign.right,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 prefixText: "\$",
               ),
               onSubmitted: (String value) {
@@ -222,15 +230,16 @@ class _MyHomePageState extends State<MyHomePage> {
           AnimFit(
             child: TextField(
               controller: _textEditingCtl,
-              style: TextStyle(fontSize: 26),
+              style: const TextStyle(fontSize: 26),
               focusNode: _aniEuroFocusNode,
               textInputAction: TextInputAction.next,
-              keyboardType: TextInputType.numberWithOptions(decimal: true),
+              keyboardType:
+                  const TextInputType.numberWithOptions(decimal: true),
               inputFormatters: [
                 FilteringTextInputFormatter.allow(RegExp(r"\d+\.?\d*")),
               ],
               textAlign: TextAlign.right,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 suffixText: "€",
               ),
               onSubmitted: (String value) {
@@ -241,7 +250,7 @@ class _MyHomePageState extends State<MyHomePage> {
           AnimFit(
             child: TextField(
               controller: _textEditingCtl,
-              style: TextStyle(fontSize: 26),
+              style: const TextStyle(fontSize: 26),
               focusNode: _aniDongFocusNode,
               textInputAction: TextInputAction.next,
               keyboardType: TextInputType.number,
@@ -249,7 +258,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 FilteringTextInputFormatter.allow(RegExp(r"\d+")),
               ],
               textAlign: TextAlign.right,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 suffixText: " ₫",
                 hintText: "0",
               ),
@@ -261,7 +270,7 @@ class _MyHomePageState extends State<MyHomePage> {
           AnimFit(
             child: TextField(
               controller: _textEditingCtl,
-              style: TextStyle(fontSize: 26),
+              style: const TextStyle(fontSize: 26),
               focusNode: _aniPaddingFocusNode,
               textInputAction: TextInputAction.next,
               keyboardType: TextInputType.number,
@@ -274,14 +283,14 @@ class _MyHomePageState extends State<MyHomePage> {
                 filled: true,
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(4),
-                  borderSide: BorderSide(color: Colors.grey),
+                  borderSide: const BorderSide(color: Colors.grey),
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(4),
-                  borderSide: BorderSide(color: Colors.blue, width: 3),
+                  borderSide: const BorderSide(color: Colors.blue, width: 3),
                 ),
-                border: OutlineInputBorder(),
-                contentPadding: EdgeInsets.symmetric(
+                border: const OutlineInputBorder(),
+                contentPadding: const EdgeInsets.symmetric(
                   vertical: 15,
                   horizontal: 20,
                 ),
@@ -293,19 +302,19 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           Text(
             'Custom builder example',
-            style: Theme.of(context).textTheme.headline4,
+            style: Theme.of(context).textTheme.headlineLarge,
           ),
           Center(
             child: Padding(
-              padding: EdgeInsets.symmetric(vertical: 10),
+              padding: const EdgeInsets.symmetric(vertical: 10),
               child: AnimatedFittedTextFieldContainer(
-                growDuration: Duration(milliseconds: 300),
-                shrinkDuration: Duration(milliseconds: 600),
+                growDuration: const Duration(milliseconds: 300),
+                shrinkDuration: const Duration(milliseconds: 600),
                 growCurve: Curves.easeOutCirc,
                 shrinkCurve: Curves.easeInCirc,
                 child: TextField(
                   controller: _textEditingCtl,
-                  style: TextStyle(fontSize: 26),
+                  style: const TextStyle(fontSize: 26),
                   focusNode: _aniWholePoundFocusNode,
                   textInputAction: TextInputAction.next,
                   keyboardType: TextInputType.number,
@@ -313,7 +322,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     FilteringTextInputFormatter.allow(RegExp(r"\d+")),
                   ],
                   textAlign: TextAlign.right,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     prefixText: "£",
                     suffixText: ".00",
                     hintText: "0",
@@ -332,8 +341,8 @@ class _MyHomePageState extends State<MyHomePage> {
                         top: 0,
                         right: -22,
                         child: _textEditingCtl.text.length < 5
-                            ? Icon(Icons.star_border)
-                            : Icon(Icons.star, color: Colors.amber),
+                            ? const Icon(Icons.star_border)
+                            : const Icon(Icons.star, color: Colors.amber),
                       ),
                     ],
                   ),
@@ -349,15 +358,15 @@ class _MyHomePageState extends State<MyHomePage> {
 
 class Fit extends StatelessWidget {
   final TextField child;
-  final CalculateFunction calculator;
+  final CalculateFunction? calculator;
 
-  Fit({Key key, @required this.child, this.calculator}) : super(key: key);
+  Fit({super.key, @required required this.child, this.calculator});
 
   @override
   Widget build(BuildContext context) {
     return Center(
       child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 10),
+        padding: const EdgeInsets.symmetric(vertical: 10),
         child: FittedTextFieldContainer(child: child, calculator: calculator),
       ),
     );
@@ -367,16 +376,16 @@ class Fit extends StatelessWidget {
 class AnimFit extends StatelessWidget {
   final TextField child;
 
-  AnimFit({Key key, this.child}) : super(key: key);
+  AnimFit({super.key, required this.child});
 
   @override
   Widget build(BuildContext context) {
     return Center(
       child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 10),
+        padding: const EdgeInsets.symmetric(vertical: 10),
         child: AnimatedFittedTextFieldContainer(
-          growDuration: Duration(milliseconds: 300),
-          shrinkDuration: Duration(milliseconds: 600),
+          growDuration: const Duration(milliseconds: 300),
+          shrinkDuration: const Duration(milliseconds: 600),
           growCurve: Curves.easeOutCirc,
           shrinkCurve: Curves.easeInCirc,
           child: child,
